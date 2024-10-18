@@ -24,8 +24,6 @@ Your finished project should demonstrate the following concepts we learned in cl
 -Include a comment section at the top of each file with the name of the Group member who contributed to the code.  Each group member should have an equal role in designing/writing/debugging code. 
 
 
- 
-
 #Presentation (20% of grade) 
 -Create a PowerPoint (or other graphical) presentation that is aimed at your target audience (our class). 
 
