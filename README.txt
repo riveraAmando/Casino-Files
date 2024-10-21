@@ -30,7 +30,4 @@ Your finished project should demonstrate the following concepts we learned in cl
 -Must be 10 minutes long.  Presentations will be done in class.  Be able to correctly use C vocabulary words from class during your presentation.  
 You will be expected to be an attentive listener during all of your classmates’ presentations.
 
-#Task Division:
--Amando: Slot machine
--Sid and Keven: Poker
--Sergio: Blackjack
+
