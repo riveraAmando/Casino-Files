@@ -33,5 +33,4 @@ You will be expected to be an attentive listener during all of your classmatesâ€
 #Task Division:
 -Amando: Slot machine
 -Sid and Keven: Poker
--Sergio: I forgot what Sergio is doing, so please let me know.
-
+-Sergio: Blackjack
