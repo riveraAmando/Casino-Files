@@ -80,8 +80,7 @@ int main() {
     int player_money;
     printf (" How much money would you like to start with? : ");
     scanf ("%d",&player_money);
-   
-    char play_again;
+
 
     do {
         shuffle_deck(deck);
