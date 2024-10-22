@@ -132,10 +132,10 @@ int main() {
         printf("Do you want to play again? (y/n): ");
         scanf(" %c", &play_again);
 
-        //If they play again, reset money if they've run out
+        //If the player wants to play again
         if (play_again == 'y' && player_money <= 0) {
-            printf("You are out of money. Resetting your balance to $100.\n");
-            player_money = 100;
+            printf("You are out of money. How much more money would you like to add?\n");
+            scanf ("%d",&player_money);
         }
 
     } while (play_again == 'y' && player_money > 0);
