@@ -37,7 +37,7 @@ void shuffle_deck(Card deck[]) {
 
 // Deal cards to player
 void deal_cards(Card deck[], Card player_hand[], int num_cards) {
-    static int current_card = 0;  // Track current card in the deck
+    
     int i;
     for ( i = 0; i < num_cards; i++) {
         player_hand[i] = deck[current_card++];
