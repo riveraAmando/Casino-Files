@@ -51,7 +51,7 @@ void display_card(Card card) {
     printf("%s of %s\n", ranks[card.rank], suits[card.suit]);
 }
 
-// Display community cards based on how many should be revealed
+// Display River
 void reveal_cards(Card community_cards[], int reveal_count) {
     printf("Community Cards:\n");
     int i;
