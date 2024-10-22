@@ -35,33 +35,58 @@ void sign()     ///print casino sign
   printf(" ADDFHE  KIF  HHG  JGM  FIL  GF R FF VZGF  KGG ZMGH  GGG  GFLW FGDDB \033[0m\n"); 
     }
 
-int betting(){          ///Prompts the user on the bets they want to wager for each slot turn
+int betting(int bet)
+{                      ///Prompts the user on the bets they want to wager for each slot turn
   char input;
-  int bet = 10;
   printf("Welcome to the slots! How much would you like to bet?\n");
   while(bet >= 0){
-    printf("(Enter + to increase bet by 10, - to decrease bet by 10, or q to leave slots)\n");
-    printf("Bet amount: $%d\n", bet);
+    printf("--------------------------------------------");
+    printf("\nInstructions: \nEnter + for +$10 bet or enter - for -$10 bet\nEnter 1 to play or enter q to leave slots\n");
+    printf("--------------------------------------------");
+    printf("\nBet amount: $%d\n", bet);
     scanf(" %c", &input);
-    if (input == '+'){
+    if (input == '+')
+    {
       bet = bet + 10;
-    }else if(input == '-'){
+    }
+    else if(input == '-')
+    {
       bet = bet - 10;       
-    }else if (input == 'q'){
+    }
+    else if (input == 'q')
+    {
       printf("We're sad to see you go.\n");
-      break;        
-    }else {
+      break; 
+    }
+    else if (input == '1')
+    {
+      break;
+    }
+    else {
         printf("Invalid input. Please try again.\n");
          }  
-  }return bet;
-             } 
-void slots(){              ///Each slot has independent chances of occurring where 3 of the same garners a bonus
-  srand(time(NULL));        /// A player wins the jackpot if they get three 7's in a row
-  int x, y, z;
-  int icon1 = (rand()% 100) + 1;
-  int icon2 = (rand()% 50) + 3;
-  int icon3 = (rand()% 80) + 2;
-  switch(icon1){
+  }
+  return bet;
+} 
+
+int slots(int amountOfBet)
+{              ///Each slot has independent chances of occurring where 3 of the same garners a bonus
+  char input;
+  int x, y, z; 
+  int money = 200;
+  while (money > 0)
+  {
+    srand(time(NULL));        /// A player wins the jackpot if they get three 7's in a row
+    int icon1 = (rand()% 100) + 1;
+    int icon2 = (rand()% 50) + 3;
+    int icon3 = (rand()% 80) + 2;
+    printf("\nBalance $%d", money);
+    printf("\nEnter 1 to spin: ");
+    scanf(" %c", &input);
+    if (input == '1')
+    {
+       money = money - amountOfBet;
+       switch(icon1){
     case 1 ... 50:
       printf("1: Cherry\n");
       x = 1;
@@ -111,19 +136,29 @@ void slots(){              ///Each slot has independent chances of occurring whe
        break;         
                 }
   if ((z==y) & (x==y) && x != 3){
-    printf("You have won a bonus!");
+    yellow();
+    printf("You have won a bonus!\033[0m\n");
+    money = money + 30;
  }else if((z==y) & (x==y) && x == 3){
-    printf("You have won the jackpot!");
- }
+    yellow();
+    printf("You have won the jackpot!\033[0m\n");
+    money = money + 100;
+ } 
+    }
+    else if (input == 'q')
+    {
+        printf("Goodbye");
+    }
+  }
+    return money;
+ 
+}
 
 
-            }
 int main()
 {                                                                                                                     
   sign();
-  ///betting();
-  slots();
-  
+  slots(betting(10));
 	return 0;
 }
 
