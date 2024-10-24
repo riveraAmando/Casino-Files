@@ -98,7 +98,7 @@ int main()
   // Determine Winner
   if(ai_hand.handRank > player_hand.handRank)
     printf("AI WINS!\n");
-  else if(ai_hand.handRank > player_hand.handRank)
+  else if(ai_hand.handRank < player_hand.handRank)
     printf("PLAYER WINS!\n");
   else
     printf("TIE\n");
