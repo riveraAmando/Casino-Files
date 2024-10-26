@@ -9,6 +9,8 @@
 * Version:   1.0 Oct 18, 2024
 *            1.1 Oct 22, 2024 (seperated functions into header files
 *                              and created basic player vs ai game)
+*            1.2 Oct 25, 2024 (added card visuals to game and updated
+*                              pair tie breaker)
 *
 ***********************************************************/
 
@@ -16,23 +18,38 @@
 #include <stdlib.h>
 #include <time.h>
 
+#include "cardart.c"
 #include "cardSetType.h"
 #include "readCards.h"
 #include "cardOps.h"
 #include "rankHand.h"
+
+void clearScreen()
+{
+  printf("\e[1;1H\e[2J");
+}
+
+void waitForInput()
+{
+  char dummy;
+  printf("\nEnter to continue.");
+  scanf("%c",&dummy);
+  clearScreen();
+}
 
 
 
 
 int main()
 {
-  char dummy;
+  
   // Game Setup
   srand(time(NULL));
   Deck main_deck;
   Hand player_hand;
   Hand ai_hand;
   Hand card_pool;
+  clearScreen();
   
   // Round Setup
   fillDeck(&main_deck);
@@ -43,65 +60,64 @@ int main()
   draw(&ai_hand,&main_deck,2);
   
   printf("-------BLIND-------\n");
-  printf("Your cards:\n");
-  printCards(player_hand);
-  player_hand.handRank = handRank(player_hand,card_pool,1);
-  printf("\n");
-  printf("Enter to continue.");
-  scanf("%c",&dummy);
+  printf("Your Hand:\n");
+  printHand(player_hand.cardID,player_hand.numCards);
+  handRank(player_hand,card_pool,1);
   
-  printf("\n--------FLOP-------\n");
+  waitForInput();
+  
+  printf("--------FLOP-------\n");
+  printf("Community Cards:\n");
   draw(&card_pool,&main_deck,3);
-  printf("Community cards:\n");
-  printCards(card_pool);
-  printf("Your cards:\n");
-  printCards(player_hand);
-  player_hand.handRank = handRank(player_hand,card_pool,1);
+  printHand(card_pool.cardID,card_pool.numCards);
+  printf("\nYour Hand:\n");
+  printHand(player_hand.cardID,player_hand.numCards);
+  handRank(player_hand,card_pool,1);
   printf("\n");
-  printf("Enter to continue.");
-  scanf("%c",&dummy);
   
-  printf("\n--------TURN-------\n");
+  waitForInput();
+  
+  printf("--------TURN-------\n");
+  printf("Community Cards:\n");
   draw(&card_pool,&main_deck,1);
-  printf("Community cards:\n");
-  printCards(card_pool);
-  printf("Your cards:\n");
-  printCards(player_hand);
-  player_hand.handRank = handRank(player_hand,card_pool,1);
+  printHand(card_pool.cardID,card_pool.numCards);
+  printf("\nYour Hand:\n");
+  printHand(player_hand.cardID,player_hand.numCards);
+  handRank(player_hand,card_pool,1);
   printf("\n");
-  printf("Enter to continue.");
-  scanf("%c",&dummy);
   
-  printf("\n-------RIVER-------\n");
+  waitForInput();
+  
+  printf("-------RIVER-------\n");
+  printf("Community Cards:\n");
   draw(&card_pool,&main_deck,1);
-  printf("Community cards:\n");
-  printCards(card_pool);
-  printf("Your cards:\n");
-  printCards(player_hand);
-  player_hand.handRank = handRank(player_hand,card_pool,1);
+  printHand(card_pool.cardID,card_pool.numCards);
+  printf("\nYour Hand:\n");
+  printHand(player_hand.cardID,player_hand.numCards);
+  handRank(player_hand,card_pool,1);
   printf("\n");
-  printf("Enter to continue.");
-  scanf("%c",&dummy);
   
-  printf("\n-------REVEAL------\n");
-  printf("Community cards:\n");
-  printCards(card_pool);
-  printf("Your cards:\n");
-  printCards(player_hand);
+  waitForInput();
+  
+  printf("-------REVEAL------\n");
+  printf("Community Cards:\n");
+  printHand(card_pool.cardID,card_pool.numCards);
+  printf("\nYour Hand:\n");
+  printHand(player_hand.cardID,player_hand.numCards);
   player_hand.handRank = handRank(player_hand,card_pool,1);
   printf("\n");
-  printf("AI cards:\n");
-  printCards(ai_hand);
+  printf("\nAI Hand:\n");
+  printHand(ai_hand.cardID,ai_hand.numCards);
   ai_hand.handRank = handRank(ai_hand,card_pool,1);
   printf("\n");
   
   // Determine Winner
   if(ai_hand.handRank > player_hand.handRank)
-    printf("AI WINS!\n");
+    printf("\nAI WINS!\n");
   else if(ai_hand.handRank < player_hand.handRank)
-    printf("PLAYER WINS!\n");
+    printf("\nPLAYER WINS!\n");
   else
-    printf("TIE\n");
+    printf("\nTIE\n");
   
   return 0;
 }

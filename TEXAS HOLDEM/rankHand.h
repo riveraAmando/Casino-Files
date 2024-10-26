@@ -330,13 +330,13 @@ int handRank(Hand hand, Hand community, int print)
   {
     if(print)
       printf("(Two Pair)");
-    return 5*10000 + checkTwoPair(hand,community);
+    return 4*10000 + checkTwoPair(hand,community);
   }
   if(checkPair(hand,community)>=0)
   {
     if(print)
       printf("(Pair)");
-    return 5*10000 + checkPair(hand,community);
+    return 3*10000 + checkPair(hand,community)*100 + checkHighCard(hand);
   }
   
   if(print)

@@ -1,6 +1,11 @@
 #ifndef readCards
 #define readCards
 
+/*******************************************
+*  Determines the Suit and Value from 
+*  cardID.
+*******************************************/
+
 char* cardSuit(int cardID)
 {
   switch(cardID/100)
