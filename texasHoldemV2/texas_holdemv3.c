@@ -147,6 +147,25 @@ void bettingRound(Player player[], Table *table, int num_players, int *turn_play
 	table->high_bet = 0; 
 }
 
+// Very Basic Win Checker
+void determineWinner(Player player[],Table * table,int num_players)
+{
+  int p,best_hand=0,best_player;
+  for(p=0;p<num_players;p++)
+  {
+    printf("Player %d:\n",p);
+    printCards(player[p].hand, player[p].num_cards);
+    determineScore(&player[p],*table,1,1);
+    if(player[p].score > best_hand)
+    {
+      best_hand = player[p].score;
+      best_player = p;
+    }
+  }
+  
+  printf("Player %d WINS!\n",best_player);
+}
+
 
 int main() {
 	srand(time(0));
@@ -157,8 +176,12 @@ int main() {
 	do {
 		printf("How many players (min 2, max 5): ");
 		good_scan = scanf("%d", &num_players);
-		if (num_players >= 2 && num_players <= 5 && good_scan > 0) break;
+		if (num_players >= 2 && num_players <= 5 && good_scan > 0) 
+      break;
+    if(good_scan == 0)
+      scanf("%*[^\n]");
 		printf("Invalid player count, please try again.\n");
+   
 	} while (1);
 
 	// Initialize deck, players, table, and starting dealer
@@ -201,6 +224,7 @@ int main() {
 	printHandState(player[0], table);
 	bettingRound(player, &table, num_players, &turn_player);
 
+  determineWinner(player,&table,num_players);
 
 	return 0;
 }
