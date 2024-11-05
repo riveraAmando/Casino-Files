@@ -17,6 +17,7 @@ NEED TO DO  (from rubric)
 -professionalism
 -style guide Google’s coding guidelines: https://Links to an external site.google.github.io/styleguide/cppguide.htmlLinks to an external site.  Your Style Guide doesn’t have to be nearly this extensive, but when I look at the files produced by different group members, coding styles should match.
 -Include a comment section at the top of each file with the name of the Group member who contributed to the code.  Each group member should have an equal role in designing/writing/debugging code. 
+
 DONE (from rubric)
 -arrays (Used in Texas Hold-em)
 -multiple user-defined functions (Used in Slots.c)
