@@ -7,22 +7,23 @@
 
 Your finished project should demonstrate the following concepts we learned in class:
 
+NEED TO DO  (from rubric)
 -thoughtful selection of variable names
 -easy to read and well-documented code
--arrays
 -robust error checking
--if statements
--while and/or do-while
--for loops
--multiple user-defined functions
--file I/O
--multiple source code files and header files
+-multiple source code files and header files 
 -good programming practices
 -C comments describing the code
 -professionalism
 -style guide Google’s coding guidelines: https://Links to an external site.google.github.io/styleguide/cppguide.htmlLinks to an external site.  Your Style Guide doesn’t have to be nearly this extensive, but when I look at the files produced by different group members, coding styles should match.
 -Include a comment section at the top of each file with the name of the Group member who contributed to the code.  Each group member should have an equal role in designing/writing/debugging code. 
-
+DONE (from rubric)
+-arrays (Used in Texas Hold-em)
+-multiple user-defined functions (Used in Slots.c)
+-file I/O (Used in Texas Hold-em)
+-for loops (Used in Texas Hold-em)
+-while and/or do-while (Used in Slots.c)
+-if statements (Used in Slots.c)
 
 #Presentation (20% of grade) 
 -Create a PowerPoint (or other graphical) presentation that is aimed at your target audience (our class). 
