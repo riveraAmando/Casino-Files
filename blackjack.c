@@ -7,6 +7,8 @@
 *                  v1.0 - 10/23/2024 (removed second player, added dealer inheriting most player 2 code)
 *                  v1.1 - 10/29/2024 (implemented card system created by Keven Duong and separated player and dealer cycles)
 *                  v1.2 - 11/5/2024  (Fixed endless dealing bug, dealer printing player deack twice and garbage values being received as well as it not accepting input)
+*                  v2.0 - 11/12/2024 Implemented Dealer AI improvements (Auto stand if player bust, as well as a difficulty ranking which modifies how much risk they are willing to taken exchange for changing prize) and a wait.
+*                  v2.1 - Fixes folding at the wrong values, and not folding on player bust, succesfully implements Cheater Dealer.
 *************************************/
 #include <stdio.h>
 
@@ -55,19 +57,46 @@ void main() {
   Player dealer;
   Deck deck;
   resetBlackjackGame(&player, &deck, &dealer);
-  printf("Win doubles the bet. How much will you bet? ");
+  //sets up dealer AI and risk values
+  int guts = -1;
+  int riskFactor;
+  int waryness;
+  printf("Select dealer guts value:\nNormal:    x2 Money                 Enter 1\nDaredevil: x1.5(rounded down) Money Enter 2\nCoward:    x1.5(rounded down) Money Enter 3\nCheater:   x3 Money                 Enter 0\n");
+  scanf("%d", &guts);
+  while(guts < 0 || guts > 3){
+    printf("Invalid value, please try again. ");
+    scanf("%d", &guts);
+  }
+  printf("How much will you bet? ");
   scanf("%d", &player.bet);
   player.money = user_money;
   while(player.bet <= 0 || player.bet > user_money){
     printf("Invalid value, please try again. ");
     scanf("%d", &player.bet);
   }
+  switch (guts) {
+    case 0:
+      riskFactor = 3;
+      waryness = 21;
+      break;
+    case 1:
+      riskFactor = 2;
+      waryness = 16;
+      break;
+    case 2:
+      riskFactor = -1;
+      waryness = 20;
+      break;
+    case 3:
+      riskFactor = -1;
+      waryness = 10;
+      break;
+  }
   //deals starting hands, dealer first for a bit of a loaded dice for the player, maybe good maybe bad.
   clearScreen();
   playerDeal(&dealer, &deck, 2);
   playerDeal(&player, &deck, 2);
   printHandState(&player, 0);
-//  player.fold = 0;
   //Play cycle
   while(player.fold == 0){
     printf("Player turn, press 1 to stand or 0 to hit: ");
@@ -82,22 +111,38 @@ void main() {
 		  clearScreen();
       playerDeal(&player, &deck, 1);
       printHandState(&player, 0);
-		  if(player.score > 21)
+		  if(player.score > 21){
 			  player.fold = 1;
+        dealer.fold = 1;
+     }
     }
   }
   //Dealer cycle
+  printHandState(&dealer, 1);
   while(dealer.fold == 0){
+    sleep(1);
+    if(dealer.score > waryness || dealer.score > player.score){
+      dealer.fold = 1;
+      break;
+    }
     clearScreen();
     playerDeal(&dealer, &deck, 1);
+    determineBlackjackScore(&dealer);
+    if(dealer.score > 21 && guts == 0){
+      dealer.num_cards -= 1;
+      printf("cheat");
+      dealer.fold = 1;
+    }
     printHandState(&player, 0);
     printHandState(&dealer, 1);
-    if(dealer.score > 18)
-      dealer.fold = 1;
   }
   if((player.score <= 21 && player.score > dealer.score) || (dealer.score > 21 && player.score <= 21)){
     printf("You win!\n");
-    user_money += player.bet;
+    if(riskFactor = -1){
+      user_money += player.bet + player.bet/2;
+    } else {
+      user_money += player.bet * riskFactor;
+    }
   } else if((dealer.score <= 21 && dealer.score > player.score) || (player.score > 21 && dealer.score <= 21)){
     printf("You lose!\n");
     user_money -= player.bet;
