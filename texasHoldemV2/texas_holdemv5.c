@@ -250,13 +250,13 @@ int main() {
   	bettingRound(player, &table, num_players, &turn_player);
   
     determineWinner(player,&table,num_players);
-     while(1){
+
     printf ("Would you like to play again?(Yes or No)\n");
     scanf("%s",&inp);
     if(strcmp(inp,"Yes") == 0){
       continue;
       }
-    else if(strcmp(inp,"No") == 0){
+    if(strcmp(inp,"No") == 0){
       break;
       }
     else{
@@ -264,7 +264,6 @@ int main() {
       printf ("Would you like to play again?(Yes or No)\n");
       scanf("%s",&inp);
       
-    }
     }
   }
   	return 0;
