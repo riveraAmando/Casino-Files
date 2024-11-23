@@ -1,0 +1,13 @@
+#pragma once
+void resetGame();
+void addAIMoney();
+void dealCards();
+int nextPlayer();
+void startBlind();
+void printTableState();
+void printHandState();
+void clearInputBuffer();
+void getBetFromPlayer();
+void bettingRound();
+void determineWinner();
+int poker();
