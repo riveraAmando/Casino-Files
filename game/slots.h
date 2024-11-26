@@ -217,12 +217,12 @@ int slotsEasy(int amountOfBet, int money)
   
 
 
-int slots()
+int slots(int money)
 {                                                                      
 
   srand(time(NULL));
-  slotsEasy(betting(), 200);
-	return 0;
+  money = slotsEasy(betting(), money);
+	return money;
 }
 
 

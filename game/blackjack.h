@@ -2,4 +2,4 @@
 void clearScreens();
 void resetBlackjackGame();
 void printHandState();
-void blackJack();
+int blackJack();

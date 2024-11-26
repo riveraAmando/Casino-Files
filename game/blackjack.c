@@ -48,9 +48,8 @@ void printHandStateBJ(Player * player, int dealer)
   }
 }
 
-void blackJack() {
+int blackJack(int user_money) {
   srand(time(0));
-  int user_money = 1000;
   int scanSafe;
   // defines player and dealer hand as well as the deck and ensures empty
   Player player;
@@ -149,4 +148,6 @@ void blackJack() {
   } else{	
     printf("Its a draw!\n");
   }    
+  return user_money;
 }
+

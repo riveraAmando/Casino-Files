@@ -250,7 +250,7 @@ void determineWinner(Player player[],Table * table,int num_players)
 }
 
 
-int poker(int user_money) {
+int poker(int user_money,char username[20]) {
 	srand(time(0));
   char inp[5];
  	int num_players=3;
@@ -263,7 +263,7 @@ int poker(int user_money) {
   addAIMoney(player, num_players);
   player[0].money = user_money;
   
-  strcpy(player[0].name,"USER");
+  strcpy(player[0].name,username);
   strcpy(player[1].name,"RANDY");
   strcpy(player[2].name,"STEVE");
 
