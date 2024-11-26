@@ -129,7 +129,6 @@ int blackJack(int user_money) {
     determineBlackjackScore(&dealer);
     if(dealer.score > 21 && guts == 0){
       dealer.num_cards -= 1;
-      printf("cheat");
       dealer.fold = 1;
     }
     printHandStateBJ(&player, 0);
